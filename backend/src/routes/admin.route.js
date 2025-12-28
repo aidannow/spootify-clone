@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import { getAdmin } from '../controller/admin.controller.js';
+import { createSong, deleteSong } from '../controller/admin.controller.js';
+import { protectRoute, requireAdmin } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
-router.get('/', getAdmin);
+// check if user is authentication, admin, then create song
+router.get('/songs', protectRoute, requireAdmin, createSong);
+router.delete('/songs/:songId', protectRoute, requireAdmin, deleteSong);
 
 export default router;
