@@ -120,3 +120,8 @@ export const deleteAlbum = async (req, res, next) => {
     next(error);
   }
 };
+
+// This is only called if requireAdmin middleware passes
+export const checkAdmin = async (req, res, next) => {
+  res.status(200).json({ admin:true });
+}
