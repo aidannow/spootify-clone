@@ -54,3 +54,5 @@ app.listen(PORT, () => {
 }).on('error', (err) => {
     console.error('Failed to start server:', err);
 });
+
+// TODO: socket.io for real-time features like live lyrics, notifications, etc.
