@@ -32,8 +32,6 @@ app.use(fileUpload( // to handle file uploads
     }
 ));
 
-
-
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);

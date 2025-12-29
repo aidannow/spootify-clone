@@ -1,5 +1,5 @@
-import { Song } from '../models/Song.js';
-import { Album } from '../models/Album.js';
+import { Song } from '../models/song.model.js';
+import { Album } from '../models/album.model.js';
 import cloudinary from '../lib/cloudinary.js';
 
 // Helper function to upload file to Cloudinary
@@ -13,7 +13,7 @@ const uploadToCloudinary = async (file) => {
     console.log('Error uploading to Cloudinary', error);
     throw new Error('File upload to Cloudinary failed');
   }
-}
+};
 
 export const createSong = async (req, res, next) => {
   try {
@@ -79,6 +79,44 @@ export const deleteSong = async (req, res, next) => {
 
   } catch (error) {
     console.log('Error in deleteSong', error);
+    next(error);
+  }
+};
+
+export const createAlbum = async (req, res, next) => {
+  try {
+    const { title, artist, releaseYear } = req.body;
+
+    const imageFile = req.files;
+
+    const imageUrl = await uploadToCloudinary(imageFile);
+
+    const album = new Album({
+      title,
+      artist,
+      imageUrl,
+      releaseYear
+    })
+
+    // save the album
+    await album.save();
+
+    res.status(201).json({ message: 'Album created successfully', album });
+
+  } catch (error) {
+    console.log('Error in createAlbum', error);
+    next(error);
+  }
+};
+
+export const deleteAlbum = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Song.deleteMany({ albumId: id }); // delete all songs in the album
+    await Album.findByIdAndDelete(id); // delete the album itself
+    res.status(200).json({ message: 'Album and its songs deleted successfully' });
+  } catch (error) {
+    console.log('Error in deleteAlbum', error);
     next(error);
   }
 };
