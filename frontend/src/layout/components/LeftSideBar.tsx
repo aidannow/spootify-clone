@@ -2,12 +2,21 @@ import PlaylistSkeleton from "@/components/skeletons/PlaylistSkeleton"
 import { buttonVariants } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
+import { useMusicStore } from "@/stores/userMusicStore"
 import { SignedIn } from "@clerk/clerk-react"
 import { HomeIcon, Library, MessageCircle } from "lucide-react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const LeftSideBar = () => {
-  const isLoading = true;
+  // Data fetching logic => zustand (global data to be used in all components)
+  const {albums, fetchAlbums, isLoading} = useMusicStore();
+
+  useEffect(() => {
+    fetchAlbums();
+  },[fetchAlbums]);
+
+  console.log("Albums in LeftSideBar:", albums);
 
   return (
     <div className="h-full flex flex-col gap-2">
@@ -59,9 +68,27 @@ const LeftSideBar = () => {
               // If loading, show loading playlist loading skeletons
               <PlaylistSkeleton/>
             ) : ( // else if not loading, show this
-              <>
-                <div className="text-sm text-zinc-500">No playlists found.</div>
-              </>
+              albums.map((album) => (
+                <Link to={`/albums/${album._id}`} key={album._id}
+                className="p-2 hover::bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer">
+                  {/* Album Cover Image */}
+                  <img 
+                  src={album.imageUrl}
+                  alt="Playlist img" 
+                  className="size-12 rounded-md shrink-0 object-cover"/>
+
+                  {/* Album metadata */}
+                  <div className="flex-1 min-w-0 hidden md:block">
+                    <p className="font-medium truncate">
+                      {album.title}
+                    </p>
+                    <p className="text-sm text-zinc-400 truncate">
+                      Album • {album.artist}
+                    </p>
+                  </div>
+
+                </Link>
+              ))
             )}
           </div>
         </ScrollArea>
