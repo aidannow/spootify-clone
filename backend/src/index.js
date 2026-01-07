@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { clerkMiddleware } from '@clerk/express';
 import fileUpload from 'express-fileupload';
 import path from 'path';
+import cors from 'cors';
 
 import { connectDB } from './lib/db.js';
 import userRoutes from './routes/user.route.js';
@@ -19,8 +20,18 @@ const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT;
 
+app.use(cors(
+    {
+        origin: 'http://localhost:3000', // allow requests from this origin
+        credentials: true, // allow cookies to be sent
+    }
+)); // enable CORS for all routes
+
 app.use(express.json()); // to parse req.body
-app.use(clerkMiddleware()); // this adds auth to the req obj => which user is making the request (req.auth)
+app.use(clerkMiddleware({
+    publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+    secretKey: process.env.CLERK_SECRET_KEY,
+})); // this adds auth to the req obj => which user is making the request (req.auth)
 app.use(fileUpload( // to handle file uploads
     {
         useTempFiles: true, // store files in temp folder after client uploads a song
