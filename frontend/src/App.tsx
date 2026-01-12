@@ -10,12 +10,17 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/sso-callback" 
-        // Once the user signs up, redirect them to this page
-        element={<AuthenticateWithRedirectCallback signUpFallbackRedirectUrl={"/auth-callback"} />}
+        <Route
+          path="/sso-callback"
+          // Once the user signs up, redirect them to this page
+          element={
+            <AuthenticateWithRedirectCallback
+              signUpFallbackRedirectUrl={"/auth-callback"}
+            />
+          }
         />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
-        
+
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/chat" element={<ChatPage />} />
@@ -26,4 +31,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

@@ -10,7 +10,6 @@ export function getDominantColorFromUrl(
   return new Promise((resolve, reject) => {
     const img = new Image()
 
-    // REQUIRED for Cloudinary / external images
     img.crossOrigin = "anonymous"
     img.src = imageUrl
 
