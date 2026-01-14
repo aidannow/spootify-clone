@@ -38,8 +38,6 @@ const AlbumPage = () => {
       });
   }, [currentAlbum?.imageUrl]);
 
-  console.log("bgColor:", bgColor);
-
   if (isLoading || !currentAlbum) return null;
 
   const rgbaColor = bgColor.replace("rgb", "rgba").replace(")", ", 0.8)");
@@ -58,8 +56,8 @@ const AlbumPage = () => {
               background: `linear-gradient(
                 to bottom,
                 ${rgbaColor} 0%,
-                rgba(24, 24, 27, 0.2) 50%,
-                #18181b 100%
+                #121212 50%,
+                #121212 100%
               )`,
             }}
             aria-hidden="true"
@@ -94,14 +92,14 @@ const AlbumPage = () => {
             <div className="px-6 pb-4 flex items-center gap-6">
               <Button
                 size="icon"
-                className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-400 hover:scale-105 transition-all"
+                className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-400 hover:scale-105 transition-all cursor-pointer"
               >
                 <Play className="w-7 h-7 text-black" fill="black" />
               </Button>
             </div>
 
             {/* Table Section */}
-            <div className="backdrop-blur-sm">
+            <div>
               {/* Table Header */}
               <div
                 className="grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-10 py-2 text-sm text-zinc-300"
@@ -121,7 +119,7 @@ const AlbumPage = () => {
                 {currentAlbum.songs.map((song, index) => (
                   <div key={song._id}
                     className={`grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-4 py-2 text-sm
-                      text-zinc-400 hover:bg-white/5 rounded-md group cursor-pointer`}
+                      text-zinc-400 hover:bg-white/5 rounded-md group`}
                   >
 
                     <div className="flex items-center justify-center">

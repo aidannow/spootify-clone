@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/resizable";
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "./components/LeftSideBar";
+import FriendsActivity from "./components/FriendsActivity";
 
 const MainLayout = () => {
   const isMobile = false;
@@ -29,9 +30,7 @@ const MainLayout = () => {
 
         {/* Center content area */}
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
-          <div className="h-full w-full"> 
-              <Outlet />
-          </div>
+          <Outlet />
         </ResizablePanel>
 
         <ResizableHandle className="w-2 bg-black rounded-lg tracking-colors" />
@@ -43,7 +42,7 @@ const MainLayout = () => {
           maxSize={25}
           collapsedSize={0}
         >
-          Friend's Activity Right Sidebar
+          <FriendsActivity/>
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
