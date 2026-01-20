@@ -45,7 +45,7 @@ const AlbumPage = () => {
   // Album UI
   return (
     <div className="h-full">
-			<ScrollArea className='h-full rounded-md'>
+			<ScrollArea className='h-full rounded-md overflow-hidden'>
       {/* Main Content */}
 				<div className='h-full'>
           {/* Background Gradient */}
