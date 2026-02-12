@@ -37,6 +37,7 @@ const SectionGrid = ({ title, songs, isLoading }: SectionGridProps) => {
             {/* Image of Song */}
             <div className="relative mb-4">
               <div className="aspect-square rounded-md shadow-lg overflow-hidden">
+                {/* Upon hovering increase scale */}
                 <img
                   src={song.imageUrl}
                   alt={song.title}
