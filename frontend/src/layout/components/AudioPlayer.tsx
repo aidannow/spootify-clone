@@ -1,5 +1,4 @@
 import { usePlayerStore } from "@/stores/usePlayerStore"
-import { AudioLines } from "lucide-react"
 import { useEffect, useRef } from "react"
 
 const AudioPlayer = () => {
