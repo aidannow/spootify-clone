@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Clock, Pause, Play } from "lucide-react";
 import { usePlayerStore } from "@/stores/usePlayerStore";
 
-const formatDuration = (durationInSeconds: number) => {
+export const formatDuration = (durationInSeconds: number) => {
   const minutes = Math.floor(durationInSeconds / 60);
-  const seconds = durationInSeconds % 60;
+  const seconds = Math.floor(durationInSeconds % 60);
   // Pad seconds with leading zero if needed
-  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 const AlbumPage = () => {
