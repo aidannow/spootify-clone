@@ -43,7 +43,7 @@ const AudioPlayer = () => {
       // Reset playback position
       audioElement.currentTime = 0;
       // Save the current song URL as previous
-      prevSongRef.current = currentSong ? currentSong.audioUrl : null;
+      prevSongRef.current = currentSong ? currentSong._id : null;
       // Auto play the new song
       if (isPlaying) audioElement.play();
     }
